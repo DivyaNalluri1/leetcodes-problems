@@ -1,0 +1,65 @@
+// Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
+
+//There is only one repeated number in nums, return this repeated number.
+
+//You must solve the problem without modifying the array nums and uses only constant extra space.
+
+ 
+
+Example 1:
+
+Input: nums = [1,3,4,2,2]
+Output: 2
+Example 2:
+
+Input: nums = [3,1,3,4,2]
+Output: 3
+
+
+
+
+
+
+
+
+import java.util.HashSet;
+import java.util.Set;
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+        Set<Integer> dup = new HashSet<>();
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (!dup.add(nums[i])) {
+                return nums[i];
+            }
+        }
+        return n;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 3, 4, 2, 2}; // Example array with duplicate
+        Solution solution = new Solution();
+        int duplicate = solution.findDuplicate(nums);
+        System.out.println("Duplicate element: " + duplicate);
+    }
+}
+
+
+
+// PYTHON
+class Solution:
+    def findDuplicate(self, nums):
+        dup = set()
+        n = len(nums)
+        for num in nums:
+            if num in dup:
+                return num
+            dup.add(num)
+        return n
+
+if __name__ == "__main__":
+    nums = [1, 3, 4, 2, 2]  # Example array with duplicate
+    solution = Solution()
+    duplicate = solution.findDuplicate(nums)
+    print("Duplicate element:", duplicate)
