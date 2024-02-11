@@ -1,0 +1,70 @@
+Given a string s, find the length of the longest 
+substring
+ without repeating characters.
+
+ 
+
+Example 1:
+
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+Example 2:
+
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+Example 3:
+
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+
+JAVA
+import java.util.HashSet;
+
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int start = 0;
+        int count = 0;
+        for (int end = 1; end <= s.length(); end++) {
+            if (uniqueCharacters(s.substring(start, end))) {
+                if ((end - start) > count) {
+                    count = end - start;
+                }
+            } else {
+                start++;
+            }
+        }
+        return count;
+    }
+
+    // Helper method to check if a string has all unique characters
+    private boolean uniqueCharacters(String str) {
+        HashSet<Character> set = new HashSet<>();
+        for (char c : str.toCharArray()) {
+            if (!set.add(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    
+}
+
+
+Python
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        start=0
+        count=0
+        for end in range(1,len(s)+1):
+            if len(set(s[start:end]))==len(s[start:end]):
+                if (end-start+1)>count:
+                    count=len(s[start:end])
+            else:
+                start+=1
+        return(count)
