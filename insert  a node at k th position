@@ -1,0 +1,164 @@
+Input Format: 0->1->2 , val = 5, k=2
+
+
+Result: 0->5->1->2
+
+
+
+
+
+
+
+
+
+
+
+import java.util.* ;
+import java.io.*; 
+
+/************************************************************
+
+ Following is the linkedList class structure:
+
+ class Node<T> {
+ T data;
+ Node<T> next;
+
+ public Node(T data) {
+ this.data = data;
+ }
+ }
+
+ ************************************************************/
+
+public class Solution {
+
+    static Node insert(Node head, int n, int pos, int val) {
+        // Write your code here.
+        Node newNode = new Node(val);
+        if(pos == 0){
+            newNode.next = head;
+            head = newNode;
+            return head;
+        }
+        Node temp =head;
+        while(temp.next!= null){
+            temp = temp.next;
+        }
+        if(pos == n){
+            temp.next = newNode;
+            return head;
+        }
+        temp=head;
+        for(int i=0;i<pos-1;i++){
+            temp = temp.next;
+        }
+        newNode.next = temp.next;
+        temp.next = newNode;
+        return head;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+or 
+
+
+
+
+
+
+
+
+// Node class to represent a linked list node
+class Node {
+    public int data;
+    public Node next;
+
+    // Constructor with both data and next node
+    public Node(int data1, Node next1) {
+        data = data1;
+        next = next1;
+    }
+
+    // Constructor with only data (assuming next is initially null)
+    public Node(int data1) {
+        data = data1;
+        next = null;
+    }
+}
+
+public class Main {
+    // Function to print the linked list
+    public static void printLL(Node head) {
+        while (head != null) {
+            System.out.print(head.data + " ");
+            head = head.next;
+        }
+    }
+
+    // Function to insert a new node at position k in the linked list
+    public static Node insertAtK(Node head, int val, int k) {
+        // If the linked list is empty and k is 1, insert the new node as the head
+        if (head == null) {
+            if (k == 1)
+                return new Node(val);
+            else
+                return head;
+        }
+
+        // If k is 1, insert the new node at the beginning of the linked list
+        if (k == 1)
+            return new Node(val, head);
+
+        int cnt = 0;
+        Node temp = head;
+
+        // Traverse the linked list to find the node at position k-1
+        while (temp != null) {
+            cnt++;
+            if (cnt == k - 1) {
+                // Insert the new node after the node at position k-1
+                Node newNode = new Node(val, temp.next);
+                temp.next = newNode;
+                break;
+            }
+            temp = temp.next;
+        }
+
+        return head;
+    }
+
+    public static void main(String[] args) {
+        // Sample array, value, and position for insertion
+        List<Integer> arr = Arrays.asList(12, 8, 5, 7);
+        int val = 100;
+        int k = 3;
+
+        // Creating a linked list with initial elements from the array
+        Node head = new Node(arr.get(0));
+        head.next = new Node(arr.get(1));
+        head.next.next = new Node(arr.get(2));
+        head.next.next.next = new Node(arr.get(3));
+
+        // Inserting a new node at position k in the linked list
+        head = insertAtK(head, val, k);
+
+        // Printing the linked list
+        printLL(head);
+    }
+}
